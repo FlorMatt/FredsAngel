@@ -2,6 +2,7 @@ package com.bookstore.database;
 
 import com.bookstore.model.Author;
 import com.bookstore.model.Book;
+import com.bookstore.model.Inventory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -49,7 +50,7 @@ public class BookDAO {
 	//action 1.2
 	public Book getBookByIsbn(String isbnNumber) {		
 		Book book = null;
-		String qry = "SELECT * FROM book JOIN author on author.author_id = book.author_id WHERE isbn_number = ?";		
+		String qry = "SELECT * FROM book JOIN author on author.author_id = book.author_id JOIN inventory on inventory.isbn_number = book.isbn_number WHERE book.isbn_number = ?";		
 		try(PreparedStatement preaparedStatement = connection.prepareStatement(qry)){			
 			preaparedStatement.setString( 1, isbnNumber );
 			try( ResultSet resultSet = preaparedStatement.executeQuery() ){				
@@ -183,24 +184,16 @@ public class BookDAO {
         Author author = new Author();
         author.setFullName(resultSet.getString("first_name"), resultSet.getString("last_name"));
         book.setAuthor(author);
+        
+        Inventory inventory = new Inventory();
+        inventory.setQty(resultSet.getInt("qty"));
+        book.setInventory(inventory);
 
         return book;
     }
 	
 	
-	//Helper method to extract author from resultSet
-	private Author extractAuthorFromResultSet(ResultSet resultSet) throws SQLException {
-		
-		Author author = new Author();
-		/*
-		author.setAuthorId(resultSet.getInt("author_id"));
-		author.setFirstName(resultSet.getString("first_name"));
-	    author.setLastName(resultSet.getString("last_name"));
-	    */
-	    author.setFullName(resultSet.getString("first_name"),resultSet.getString("last_name"));
-
-	    return author;     
-    }
+	
 	
 	
 	// Helper method to handle SQLException

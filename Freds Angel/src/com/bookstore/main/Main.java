@@ -44,8 +44,7 @@ public class Main {
 				optionFour(mScanner);
 				break;
 			case 5: //generate audit excel report
-				//optionFiveA(mScanner);
-				optionFiveB(mScanner);
+				optionFive(mScanner);
 				break;
 			case 6: //edit an existing book's information
 				optionSix(mScanner);
@@ -96,9 +95,10 @@ public class Main {
 		Book book = bookDAO.getBookByIsbn(isbn);
 		
 		if(book != null) {
-			System.out.println("Results: " + book);			
+			System.out.println("----Book found----\n");
+			System.out.println(book);
 		} else {			
-			logger.info("No books match your search criteria.");			
+			logger.warning("No book match your search criteria.");			
 		}		
 		
 		bookDAO.closeConnection();
@@ -354,13 +354,9 @@ public class Main {
     
     //menu option 5
     //generate audit report
-    public static void optionFiveA(Scanner oScanner) {
+    public static void optionFive(Scanner oScanner) {
     	
     	oScanner.nextLine();
-    	
-    	//ask the user where they want to save the file
-    	System.out.println("Enter the file path to save the report to: ");
-    	String filePath = oScanner.nextLine();
     	
     	//get the list of books
     	BookDAO bookDAO = new BookDAO();
@@ -371,52 +367,16 @@ public class Main {
     	if (books.isEmpty()) {
     		logger.warning("No books found to generate the report\nPlease try again");
     	} else {
-    		ExcelExporter.generateInventoryAudit(books, filePath);
+    		//System.out.println(books);
+    		for(Book book : books) {
+    			System.out.println(book);
+    		}
     	}
     	
     	System.out.println("Press 'Enter' to return to the main menu");
     	oScanner.nextLine();
     }
     
-    public static void optionFiveB(Scanner oScanner) {
-    	
-    	oScanner.nextLine();
-    	
-    	//get the list of books
-    	BookDAO bookDAO = new BookDAO();
-    	List<Book> books = bookDAO.getAllBooks();
-    	bookDAO.closeConnection();
-    	
-    	//check if there is no books
-    	if (books.isEmpty()) {
-    		logger.warning("No books found to generate the report\nPlease try again");
-    	} else {
-    		System.out.println("Books were found: ");
-    		
-    		for(Book book : books) {
-    			System.out.println(book);
-    		}
-    		
-    		//ask the user if they want to export the report to excel
-    		//ask the user where they want to save the file
-        	System.out.println("Do you want to export the report? (yes/no) ");
-        	String eChoice = oScanner.nextLine().toLowerCase();
-        	
-        	if (eChoice.equals("yes")) {
-        		//ask the user where they want to save the file
-            	System.out.println("Enter the file path to save the report to: ");
-            	String filePath = oScanner.nextLine();
-            	
-            	ExcelExporter.generateInventoryAudit(books, filePath);
-            	System.out.println("The report was successfully exported to: \" + filePath");
-        	} else {
-        		logger.warning("Report was not exported\nPlease try again");
-        	}
-    	}
-    	
-    	System.out.println("Press 'Enter' to return to the main menu");
-    	oScanner.nextLine();
-    }
     
     
     

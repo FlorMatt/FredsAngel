@@ -94,7 +94,7 @@ public class Book {
 	}
 	
 	
-	//get author this
+	//get author
 	public Author getAuthor() {
 		return author;		
 	}
@@ -131,7 +131,10 @@ public class Book {
 				"Genre: 			" + genre + "\n" +
 				"Active?: 		" + active + "\n" +
 				"Purchase Cost: 		$" + purchaseCost + "\n" +
-				"Retail Price: 		$" + retailPrice + "\n";
+				"Retail Price: 		$" + retailPrice + "\n" + 
+				"Inventory Qty:		" + inventory.getQty() + "\n" +
+				"Inventory Value: 	$" + purchaseCost * inventory.getQty() + "\n" +
+				"Retail Value: 		$" + retailPrice * inventory.getQty() + "\n";
 		
 	}	
 }
