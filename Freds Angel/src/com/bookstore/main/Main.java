@@ -27,6 +27,7 @@ public class Main {
 			System.out.println("Enter 5 to generate an Audit Report");
 			System.out.println("Enter 6 to edit a Book");
 			System.out.println("Enter 0 to exit the application");
+			System.out.println("hello");
 			
 			mOption = mScanner.nextInt();
 			
