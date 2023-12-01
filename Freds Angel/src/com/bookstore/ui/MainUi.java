@@ -14,7 +14,7 @@ public class MainUi {
 		mainFrm.setTitle("Inventory Management System");
 		mainFrm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainFrm.setSize(600,800);
-		mainFrm.setLayout(new BorderLayout());
+		mainFrm.setLayout(new BorderLayout(10,10));
 		
 		ImageIcon appLogo = new ImageIcon("inventoryLogo.png");
 		mainFrm.setIconImage(appLogo.getImage());
@@ -22,29 +22,61 @@ public class MainUi {
 		
 		mainFrm.setVisible(true);
 		
-		JPanel panel1 = new JPanel();
-		JPanel panel2 = new JPanel();
-		JPanel panel3 = new JPanel();
-		JPanel panel4 = new JPanel();
-		JPanel panel5 = new JPanel();
+		JPanel topPnl = new JPanel();
+		//JPanel leftPnl = new JPanel();
+		//JPanel rightPnl = new JPanel();
+		//JPanel btmPnl = new JPanel();
+		JPanel cntPnl = new JPanel();
 		
-		panel1.setBackground(Color.red);
-		panel2.setBackground(Color.green);
-		panel3.setBackground(Color.yellow);
-		panel4.setBackground(Color.magenta);
-		panel5.setBackground(Color.blue);
+		topPnl.setBackground(new Color(201,201,201));
+		//leftPnl.setBackground(Color.green);
+		//rightPnl.setBackground(Color.yellow);
+		//btmPnl.setBackground(Color.magenta);
+		cntPnl.setBackground(Color.gray);
 		
-		panel1.setPreferredSize(new Dimension(100,100));
-		panel2.setPreferredSize(new Dimension(100,100));
-		panel3.setPreferredSize(new Dimension(100,100));
-		panel4.setPreferredSize(new Dimension(100,100));
-		panel5.setPreferredSize(new Dimension(100,100));
+		cntPnl.setLayout(new BorderLayout());
 		
-		mainFrm.add(panel1,BorderLayout.NORTH);
-		mainFrm.add(panel2,BorderLayout.WEST);
-		mainFrm.add(panel3,BorderLayout.EAST);
-		mainFrm.add(panel4,BorderLayout.SOUTH);
-		mainFrm.add(panel5,BorderLayout.CENTER);
+		topPnl.setPreferredSize(new Dimension(100,100));
+		//leftPnl.setPreferredSize(new Dimension(1100,100));
+		//rightPnl.setPreferredSize(new Dimension(100,100));
+		//btmPnl.setPreferredSize(new Dimension(100,100));
+		cntPnl.setPreferredSize(new Dimension(100,100));
+		
+		//------------------ sub pannels ------------------
+		
+		JPanel panel6 = new JPanel();
+		JPanel panel7 = new JPanel();
+		JPanel panel8 = new JPanel();
+		JPanel panel9 = new JPanel();
+		JPanel topPnl0 = new JPanel();
+		
+		panel6.setBackground(Color.lightGray);
+		panel7.setBackground(Color.lightGray);
+		panel8.setBackground(Color.lightGray);
+		panel9.setBackground(Color.lightGray);
+		topPnl0.setBackground(Color.lightGray);
+		
+		cntPnl.setLayout(new BorderLayout());
+		
+		panel6.setPreferredSize(new Dimension(50,50));
+		panel7.setPreferredSize(new Dimension(50,50));
+		panel8.setPreferredSize(new Dimension(50,50));
+		panel9.setPreferredSize(new Dimension(50,50));
+		topPnl0.setPreferredSize(new Dimension(50,50));
+		
+		//cntPnl.add(panel6,BorderLayout.CENTER);
+		cntPnl.add(panel7,BorderLayout.CENTER);
+		//cntPnl.add(panel8,BorderLayout.CENTER);
+		//cntPnl.add(panel9,BorderLayout.CENTER);
+		//cntPnl.add(topPnl0,BorderLayout.CENTER);
+		
+		//------------------ sub pannels ------------------
+		
+		mainFrm.add(topPnl,BorderLayout.NORTH);
+		//mainFrm.add(leftPnl,BorderLayout.WEST);
+		//mainFrm.add(rightPnl,BorderLayout.EAST);
+		//mainFrm.add(btmPnl,BorderLayout.SOUTH);
+		mainFrm.add(cntPnl,BorderLayout.CENTER);
 	}
 
 }
