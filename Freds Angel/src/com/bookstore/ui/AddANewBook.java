@@ -102,25 +102,63 @@ public class AddANewBook {
 	
 	 private void addBook() {
         
-        String isbn = isbnTxtField.getText();
-        String title = titleTxtField.getText();
-        double purchase = Double.parseDouble(purchaseTxtField.getText());
-        double retail = Double.parseDouble(retailTxtField.getText());
-        String genre = genreTxtField.getText();
-        int authorId = Integer.parseInt(authorIdTxtField.getText());
+	 	String isbn = isbnTxtField.getText().trim();
+        String title = titleTxtField.getText().trim();
+        String purchaseStr = purchaseTxtField.getText().trim();
+        String retailStr = retailTxtField.getText().trim();
+        String genre = genreTxtField.getText().trim();
+        String authorIdStr = authorIdTxtField.getText().trim();
 
-        // Validate inputs (add your own validation logic)
+        /*
+         * validate inputs
+         */
+        if (isbn.isEmpty() || title.isEmpty() || purchaseStr.isEmpty() || retailStr.isEmpty() || genre.isEmpty() || authorIdStr.isEmpty()) {
+        	
+            JOptionPane.showMessageDialog(frame, "All fields are required. Please fill in all fields.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        /*
+         * validate isbn number
+         */
+        if (!isValidIsbn(isbn)) {
+            JOptionPane.showMessageDialog(frame, "Please enter a valid ISBN Number pattern.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
-        Book newBook = new Book(isbn, title, purchase, retail, true, genre, authorId);
+        try {
+            double purchase = Double.parseDouble(purchaseStr);
+            double retail = Double.parseDouble(retailStr);
+            int authorId = Integer.parseInt(authorIdStr);
 
+            // Check if the ISBN already exists
+            if (isIsbnAlreadyExists(isbn)) {
+                JOptionPane.showMessageDialog(frame, "This ISBN already exists. Please enter a unique ISBN.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Create new book
+            Book newBook = new Book(isbn, title, purchase, retail, true, genre, authorId);
+
+            // Add book to the database
+            BookDAO bookDAO = new BookDAO();
+            bookDAO.addBook(newBook);
+            bookDAO.closeConnection();
+
+            JOptionPane.showMessageDialog(frame, "The new book was successfully added!");
+
+            clearInputFields();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(frame, "Please enter valid numeric values for 'Purchase Cost', 'Retail Price', and 'Author ID'.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+	 
+	 private boolean isIsbnAlreadyExists(String isbn) {
         BookDAO bookDAO = new BookDAO();
-        bookDAO.addBook(newBook);
+        boolean exists = bookDAO.doesIsbnExists(isbn);
         bookDAO.closeConnection();
-
-        JOptionPane.showMessageDialog(frame, "The new book was successfully added!");
-
-        clearInputFields();
-	    }
+        return exists;
+	   }
 
 	    private void clearInputFields() {
 	    	

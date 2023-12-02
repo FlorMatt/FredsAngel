@@ -11,7 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 public class BookDAO {
+	
+	private JFrame frame = new JFrame();
 	
 	private Connection connection;
 		
@@ -21,7 +26,7 @@ public class BookDAO {
 				this.connection = DatabaseConnection.getConnection();				
 			}
 			catch (SQLException e) {				
-				handleSQLException(e);				
+				JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);				
 			}
 		}
 		
@@ -40,7 +45,7 @@ public class BookDAO {
 				}				
 			}			
 		} catch(SQLException e) {			
-			handleSQLException(e);			
+			JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);			
 		}		
 		return book;		
 	}
@@ -62,7 +67,7 @@ public class BookDAO {
 				}				
 			}			
 		} catch(SQLException e) {			
-			handleSQLException(e);			
+			JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);			
 		}		
 		return book;		
 	}
@@ -80,7 +85,7 @@ public class BookDAO {
                 books.add(book);                
             }            
         } catch (SQLException e) {        	
-            handleSQLException(e);            
+        	JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);            
         }        
         return books;        
     }
@@ -100,7 +105,7 @@ public class BookDAO {
             preparedStatement.setInt( 7, book.getAuthorId() );
             preparedStatement.executeUpdate();              
         } catch (SQLException e) {        	
-            handleSQLException(e);            
+        	JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);            
         }
     }
 	
@@ -127,7 +132,7 @@ public class BookDAO {
 			
 			
 		} catch(SQLException e) {
-			handleSQLException(e);
+			JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}
@@ -161,7 +166,7 @@ public class BookDAO {
 			}
 			
 		} catch(SQLException e){
-			handleSQLException(e);
+			JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);
 			return false;
 		}
 	}
@@ -197,8 +202,8 @@ public class BookDAO {
 	
 	
 	// Helper method to handle SQLException
-    private void handleSQLException(SQLException e) {    	
-        e.printStackTrace();        
+    private String handleSQLException(SQLException e) {    	
+    	return "SQL Error: " + e.getMessage();        
     }
     
     
@@ -212,8 +217,26 @@ public class BookDAO {
                 connection.close();                
             }
         } catch (SQLException e) {        	
-            handleSQLException(e);            
+        	JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);            
         }
     }
+
+
+    //check is the isbn number already exists before adding a new book
+	public boolean doesIsbnExists(String isbn) {
+		String qry = "SELECT COUNT(*) AS count FROM Book WHERE isbn_number = ?";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(qry)) {
+            preparedStatement.setString(1, isbn);
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                if (resultSet.next()) {
+                    int count = resultSet.getInt("count");
+                    return count > 0;
+                }
+            }
+        } catch (SQLException e) {
+        	JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return false;
+	}
 
 }
