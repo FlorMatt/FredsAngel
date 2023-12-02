@@ -91,6 +91,7 @@ public class AddANewBook {
 		frame.setTitle("Add a New Book");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(600, 800);
+		frame.setResizable(false);
 		frame.setLayout(null);
 		
 		ImageIcon appLogo = new ImageIcon("inventoryLogo.png");

@@ -123,10 +123,10 @@ public class BookDAO {
 			int rowsAffected = preparedStatement.executeUpdate();
 			
 			if(rowsAffected > 0) {
-				System.out.println("The status of the book has been updated successfully.");
+				//System.out.println("The status of the book has been updated successfully.");
 				return true;
 			} else {
-				System.out.println("The status of the book for isbn: " + isbnNumber + " was not updated. \nPlease check the isbn number and try again.");
+				//System.out.println("The status of the book for isbn: " + isbnNumber + " was not updated. \nPlease check the isbn number and try again.");
 				return false;
 			}
 			

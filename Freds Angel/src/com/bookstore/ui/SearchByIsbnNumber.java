@@ -51,6 +51,7 @@ public class SearchByIsbnNumber {
 		frame.setTitle("Search By ISBN Number");
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setSize(600, 800);
+		frame.setResizable(false);
 		frame.setLayout(null);
 		
 		ImageIcon appLogo = new ImageIcon("inventoryLogo.png");
