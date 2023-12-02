@@ -128,9 +128,9 @@ public class Book {
 		return 	"Book Title: 		" + bookTitle + "\n" +
 				"Isbn Number: 		" + isbnNumber + "\n" +
 				"Auhtor: 		" + author.getFullName() + "\n" +
-				"Genre: 			" + genre + "\n" +
-				"Active?: 		" + active + "\n" +
-				"Purchase Cost: 		$" + purchaseCost + "\n" +
+				"Genre: 		" + genre + "\n" +
+				"Active: 		" + active + "\n" +
+				"Purchase Cost: 	$" + purchaseCost + "\n" +
 				"Retail Price: 		$" + retailPrice + "\n" + 
 				"Inventory Qty:		" + inventory.getQty() + "\n" +
 				"Inventory Value: 	$" + purchaseCost * inventory.getQty() + "\n" +
