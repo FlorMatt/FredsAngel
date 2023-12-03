@@ -69,7 +69,7 @@ public class BookDAO {
 		} catch(SQLException e) {			
 			JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);			
 		}		
-		return book;		
+		//return book;		
 	}
 	
 	
