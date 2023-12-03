@@ -49,7 +49,7 @@ public class ChangeABookStatus {
 
         frame.setTitle("Change Book Status");
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(500, 200);
+        frame.setSize(600, 200);
         frame.setResizable(false);
         frame.setLayout(null);
 

@@ -101,12 +101,6 @@ public class Book {
 	public void setAuthor(Author author) {
 		this.author = author;		
 	}
-	public int getAuthorId() {
-		return authorId;
-	}
-	public void setAuthorId(int authorId) {
-		this.authorId = authorId;
-	}
 	
 	
 	
@@ -134,7 +128,8 @@ public class Book {
 				"Retail Price: 		$" + retailPrice + "\n" + 
 				"Inventory Qty:		" + inventory.getQty() + "\n" +
 				"Inventory Value: 	$" + purchaseCost * inventory.getQty() + "\n" +
-				"Retail Value: 		$" + retailPrice * inventory.getQty() + "\n";
+				"Retail Value: 		$" + retailPrice * inventory.getQty() + "\n" + 
+				"Author ID:		" + author.getAuthorId() + "\n";
 		
 	}	
 }

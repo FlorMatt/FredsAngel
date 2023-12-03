@@ -102,7 +102,7 @@ public class BookDAO {
             preparedStatement.setDouble( 4, book.getRetailPrice() );
             preparedStatement.setBoolean( 5, book.isActive() );
             preparedStatement.setString( 6, book.getGenre() );
-            preparedStatement.setInt( 7, book.getAuthorId() );
+            preparedStatement.setInt( 7, book.getAuthor().getAuthorId() );
             preparedStatement.executeUpdate();              
         } catch (SQLException e) {        	
         	JOptionPane.showMessageDialog(frame, handleSQLException(e), "Error", JOptionPane.ERROR_MESSAGE);            
@@ -152,7 +152,7 @@ public class BookDAO {
 			preparedStatement.setDouble(3, updateBook.getPurchaseCost());
 			preparedStatement.setDouble(4, updateBook.getRetailPrice());
 			preparedStatement.setString(5, updateBook.getGenre());
-			preparedStatement.setInt(6, updateBook.getAuthorId());
+			preparedStatement.setInt(6, updateBook.getAuthor().getAuthorId());
 			preparedStatement.setString(7, updateBook.getIsbnNumber());
 			
 			int rowsAffected = preparedStatement.executeUpdate();
@@ -189,6 +189,11 @@ public class BookDAO {
         Author author = new Author();
         author.setFullName(resultSet.getString("first_name"), resultSet.getString("last_name"));
         book.setAuthor(author);
+        
+        //get the author id
+        Author authorId = new Author();
+        authorId.setAuthorId(resultSet.getInt("author_id"));
+        book.setAuthor(authorId);
         
         Inventory inventory = new Inventory();
         inventory.setQty(resultSet.getInt("qty"));
