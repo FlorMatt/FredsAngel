@@ -177,27 +177,31 @@ public class BookDAO {
 	
 	//Helper method to extract book from resultSet
 	private Book extractBookFromResultSet(ResultSet resultSet) throws SQLException {		
-        Book book = new Book();        
-        book.setIsbnNumber( resultSet.getString("isbn_number"));
-        book.setBookTitle( resultSet.getString("book_title"));
-        book.setPurchaseCost( resultSet.getDouble("purchase_cost"));
-        book.setRetailPrice( resultSet.getDouble("retail_price"));
-        book.setActive( resultSet.getBoolean("active"));
-        book.setGenre( resultSet.getString("genre"));
-        
-        //Author author = extractAuthorFromResultSet(resultSet);
-        Author author = new Author();
-        author.setFullName(resultSet.getString("first_name"), resultSet.getString("last_name"));
-        book.setAuthor(author);
-        
-        //get the author id
-        Author authorId = new Author();
-        authorId.setAuthorId(resultSet.getInt("author_id"));
-        book.setAuthor(authorId);
-        
-        Inventory inventory = new Inventory();
-        inventory.setQty(resultSet.getInt("qty"));
-        book.setInventory(inventory);
+		 Book book = new Book();
+		    book.setIsbnNumber(resultSet.getString("isbn_number"));
+		    book.setBookTitle(resultSet.getString("book_title"));
+		    book.setPurchaseCost(resultSet.getDouble("purchase_cost"));
+		    book.setRetailPrice(resultSet.getDouble("retail_price"));
+		    book.setActive(resultSet.getBoolean("active"));
+		    book.setGenre(resultSet.getString("genre"));
+
+		    // Extract Author information
+		    Author author = new Author();
+		    author.setFirstName(resultSet.getString("first_name"));
+		    author.setLastName(resultSet.getString("last_name"));
+		    book.setAuthor(author);
+
+		    // Set the author full name
+		    String fullName = resultSet.getString("first_name") + " " + resultSet.getString("last_name");
+		    book.setAuthorFullName(fullName);
+
+		    // Extract authorId and set it in the Book object
+		    int authorId = resultSet.getInt("author_id");
+		    book.setAuthorId(authorId);
+
+		    Inventory inventory = new Inventory();
+		    inventory.setQty(resultSet.getInt("qty"));
+		    book.setInventory(inventory);
 
         return book;
     }

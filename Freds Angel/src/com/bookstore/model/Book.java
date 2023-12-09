@@ -13,6 +13,7 @@ public class Book {
 	private String genre;
 	private int authorId;
 	private Author author;
+	private String authorFullName;
 	private Inventory inventory;
 	
 	
@@ -25,7 +26,7 @@ public class Book {
 	
 	
 	//parameter constructor
-	public Book(String isbnNumber, String bookTitle, double purchaseCost, double retailPrice, boolean active, String genre, int authorId) {
+	public Book(String isbnNumber, String bookTitle, double purchaseCost, double retailPrice, boolean active, String genre, int authorId, String authorFullName) {
 		
 		this.isbnNumber = isbnNumber;
 		this.bookTitle = bookTitle;
@@ -34,6 +35,7 @@ public class Book {
 		this.active = active;
 		this.genre = genre;
 		this.authorId = authorId;
+		this.authorFullName = authorFullName;
 		
 	}
 	
@@ -102,7 +104,15 @@ public class Book {
 		this.author = author;		
 	}
 	
-	
+	public String getAuthorFullName() {
+		return authorFullName;
+	}
+	public void setAuthorFullName(String fullName) {
+	    this.authorFullName = fullName;
+	}
+	public void setAuthorId(int authorId) {
+	    this.author.setAuthorId(authorId);
+	}
 	
 	//get inventory
 	public Inventory getInventory() {
@@ -121,7 +131,7 @@ public class Book {
 		
 		return 	"Book Title: 		" + bookTitle + "\n" +
 				"Isbn Number: 		" + isbnNumber + "\n" +
-				"Auhtor: 		" + author.getFullName() + "\n" +
+				"Auhtor: 		" + authorFullName + "\n" +
 				"Genre: 		" + genre + "\n" +
 				"Active: 		" + active + "\n" +
 				"Purchase Cost: 	$" + purchaseCost + "\n" +

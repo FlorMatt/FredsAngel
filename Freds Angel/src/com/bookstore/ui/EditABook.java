@@ -184,7 +184,10 @@ public class EditABook {
             bookDAO.closeConnection();
 
             if (existingBook != null) {
-                Book updatedBook = new Book(isbn, title, purchase, retail, true, genre, authorId);
+                // Set existing author ID and author full name in the updated book
+                Book updatedBook = new Book(isbn, title, purchase, retail, true, genre, authorId, existingBook.getAuthorFullName());
+                updatedBook.getAuthor().setAuthorId(existingBook.getAuthor().getAuthorId());
+
                 boolean updateSuccess = bookDAO.editBook(updatedBook);
 
                 if (updateSuccess) {

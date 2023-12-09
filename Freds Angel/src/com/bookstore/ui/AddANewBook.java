@@ -139,7 +139,8 @@ public class AddANewBook {
             }
 
             // Create new book
-            Book newBook = new Book(isbn, title, purchase, retail, true, genre, authorId);
+            Book newBook = new Book(isbn, title, purchase, retail, true, genre, 0, null);
+            newBook.setAuthorId(authorId);
 
             // Add book to the database
             BookDAO bookDAO = new BookDAO();
