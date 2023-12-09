@@ -198,7 +198,7 @@ public class Main {
         }
     	
     	BookDAO bookDAO = new BookDAO();
-    	Book newBook = new Book(isbn, title, purchase, retail, active, genre, authorId);
+    	//Book newBook = new Book(isbn, title, purchase, retail, active, genre, authorId);
     	bookDAO.addBook(newBook);
     	
     	System.out.println("The new book was successfully added!");
