@@ -24,7 +24,7 @@ public class MainMenu implements ActionListener {
 	JButton fiveBtn = new JButton("Audit Report");
 	JButton sixBtn = new JButton("Edt a Book");
 	
-	MainMenu(){
+	public MainMenu(){
 		
 		int buttonWidth = 200;
         int buttonHeight = 50;
